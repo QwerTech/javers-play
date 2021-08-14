@@ -1,4 +1,4 @@
-package org.javers.organization.structure.domain;
+package org.javers.organization.structure.dto;
 
 
 import java.io.Serializable;
@@ -12,17 +12,16 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.javers.core.metamodel.annotation.TypeName;
 
-@Entity
-@Table
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Hierarchy implements Serializable {
+@TypeName("Hierarchy")
+public class HierarchyDto implements Serializable {
 
   @Id
   private String name;
 
-  @OneToMany(mappedBy = "hierarchy", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  private List<HierarchyEmployees> hierarchyEmployees;
+  private List<HierarchyEmployeesDto> hierarchyEmployees;
 }

@@ -1,4 +1,4 @@
-package org.javers.organization.structure.domain;
+package org.javers.organization.structure.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
@@ -8,32 +8,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.EqualsAndHashCode.Exclude;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.javers.core.metamodel.annotation.TypeName;
 
-@Entity
+
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class HierarchyEmployees implements Serializable {
+@TypeName("HierarchyEmployees")
+public class HierarchyEmployeesDto implements Serializable {
 
   @Id
-  @GeneratedValue
   private int id;
 
-  @ToString.Exclude
-  @EqualsAndHashCode.Exclude
-  @ManyToOne//(cascade = CascadeType.ALL)
-  @JsonIgnore
-  private Hierarchy hierarchy;
+  private EmployeeDto boss;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  private Employee boss;
-
-  @ManyToOne(cascade = CascadeType.ALL)
-  private Employee subordinate;
+  private EmployeeDto subordinate;
 
 }
+
+

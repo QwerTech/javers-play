@@ -1,4 +1,4 @@
-package org.javers.organization.structure.domain;
+package org.javers.organization.structure.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,20 +12,17 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.javers.core.metamodel.annotation.TypeName;
 
-@Entity
-@Table
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Employee implements Serializable {
+@TypeName("Employee")
+public class EmployeeDto implements Serializable {
 
   @Id
-  @Column(name = "domain_name")
   private String domainName;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  @JsonIgnore
-  private Person person;
+  private PersonDto person;
 }
 

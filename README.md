@@ -1,15 +1,9 @@
 # organization-structure
-Sample application demonstrating use of JaVers Spring Boot starters.
+Sample application demonstrating the use of Javers with spring boot.
 
 ## spring-boot-starter-data-mongodb
 
-To start app execute (requires MongoDB (3.0.0+) running on port 27017):
- 
-```
-./gradlew organization-structure-mongo:run
-```
-
-or run on H2:
+To start app execute :
 
 ```
 ./gradlew organization-structure-sql:run
@@ -17,55 +11,43 @@ or run on H2:
 
 ## REST API
 
-### Application exposes REST interface:
+### Application exposes Swagger UI interface:
 
 ```
-http://localhost:8080/view/hierarchy
-http://localhost:8080/view/hierarchy/Hier_2015
-http://localhost:8080/view/persons
-http://localhost:8080/view/person/0
+http://localhost:8080/swagger-ui/
 ```
-
+## Simple values example
 ### Make some changes on Frodo
 
 ```
-http://localhost:8080/audit/test
-```
-
-### Create new person:
-
-```
-POST http://localhost:8080/view/person
-{
-	"id": 101,
-	"firstName": "Yang",
-	"lastName": "Huajie",
-	"sex": "MALE",
-	"salary": 1000,
-	"position": "DEVELOPER"
-}
-```
-
-### Update person:
-
-```
-PUT http://localhost:8080/view/person
-{
-	"id": 101,
-	"firstName": "Yang",
-	"lastName": "Huajie",
-	"sex": "MALE",
-	"salary": 1022,
-	"position": "DEVELOPER"
-}
+POST http://localhost:8080/audit/test
 ```
 
 ### View audit data
 
 ```
-http://localhost:8080/audit/persons
-http://localhost:8080/audit/person/0
+GET http://localhost:8080/audit/persons
+GET http://localhost:8080/audit/person/0
 
-http://localhost:8080/audit/person/snapshots
-http://localhost:8080/audit/person/0/snapshots
+GET http://localhost:8080/audit/person/snapshots
+GET http://localhost:8080/audit/person/0/snapshots
+```
+
+## Updating collections and more complex structures
+### Create some hierarchical team
+
+```
+POST http://localhost:8080/audit/test/hierarchy
+```
+
+### Update created hierarchical team and show the diff
+
+```
+PUT http://localhost:8080/audit/test/hierarchy/{id}
+```
+
+### Show the diff of two hierarchies
+
+```
+GET http://localhost:8080/audit/hierarchy/{left}/diff/{right}
 ```
